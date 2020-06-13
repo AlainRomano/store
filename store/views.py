@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from .forms import RegisterForm
+
 def index(request):
     return render(request, 'index.html', {
         'message': 'hello world from sight',
@@ -35,3 +37,9 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Sesión cerrada exitosamente')
     return redirect('login')
+
+def register(request):
+    form = RegisterForm(request.POST or None)
+    if request.method == 'POST':
+        pass
+    return render(request, 'users/register.html', {'form': form})
